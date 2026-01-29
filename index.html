@@ -1,170 +1,228 @@
 <!DOCTYPE html>
-<html lang="mr">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta charset="UTF-8">
-
-<title>विद्या सचिन मोटे - डेमो मतदान यंत्र</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 
 <meta property="og:title" content="विद्या सचिन मोटे - डेमो मतदान यंत्र"/>
 <meta property="og:description" content="सांगली जिल्हा परिषद सार्वजनिक निवडणूक सन २०२६"/>
 <meta property="og:url" content="https://vidyatai.pollchit.in/"/>
 <meta property="og:image" content="https://scontent-bom2-2.xx.fbcdn.net/v/t39.30808-6/458086807_1058410925641344_7404970289350743698_n.jpg"/>
 
-<link rel="shortcut icon" href="https://drive.google.com/thumbnail?id=1YkMtemr0WNvttdNmGqK8E8Rsmi3A-c_h&sz=w1000">
+<title>विद्या सचिन मोटे - डेमो मतदान यंत्र</title>
 
+<link rel="shortcut icon" type="image/x-icon" href="https://drive.google.com/thumbnail?id=1YkMtemr0WNvttdNmGqK8E8Rsmi3A-c_h&sz=w1000">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <link href="https://fonts.googleapis.com/css2?family=Akshar:wght@300..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins&display=swap" rel="stylesheet">
 
 <style>
-
+/* ================= GENERAL ================= */
 body {
-  font-family: Akshar, sans-serif;
-  background: white;
+  width: 100%;
 }
 
-h1 { color:#ED1C24; font-size:35pt; font-weight:bold; }
-h2 { color:#213A81; font-size:26pt; font-weight:bold; }
-
-.button, .buttonCorrect, .buttonIntro {
-  text-align:center;
-  height:65px;
-  width:20%;
-  line-height:65px;
-  cursor:pointer;
-  font-size:22px;
-  color:#fff;
-  border-radius:30px;
-  background:#393186;
-  box-shadow:6px 6px 6px #999;
-  border-bottom:4px solid #4D43B2;
-  margin:10px auto;
+/* ================= BUTTONS ================= */
+.button,
+.buttonCorrect,
+.buttonIntro {
+  text-align: center;
+  height: 65px;
+  width: 20%;
+  line-height: 65px;
+  cursor: pointer;
+  font-size: 22px;
+  color: #F0F0F0;
+  border-radius: 30px;
+  border-bottom: 4px solid #4D43B2;
+  box-shadow: 6px 6px 6px #999;
+  user-select: none;
+  background: #393186;
+  margin: 10px 0;
+  transition: all .05s linear;
 }
 
-.button:active, .buttonCorrect:active {
-  transform:translateY(3px);
-  box-shadow:2px 2px 2px #777;
+.button:active,
+.buttonCorrect:active,
+.buttonIntro:active {
+  box-shadow: 2px 2px 2px #777;
+  border-bottom: 1px solid #FFB909;
+  transform: translateY(3px);
 }
 
-.blink { animation: blink 1s infinite; }
-@keyframes blink { 50% { opacity:0; } }
-
-.modal-dialog { width:100%; height:80%; }
-.modal-header { background:#0d6efd; color:white; }
-
-table {
-  width:98%;
-  margin:auto;
-  border-collapse:collapse;
-  font-size:4vw;
+/* ================= MODAL ================= */
+.modal {
+  position: fixed;
+  top: 15%;
+  bottom: 10%;
+  left: 0;
+  right: 0;
+  overflow: scroll;
 }
 
-td {
-  border:2px solid #000;
-  padding:10px;
+.modal-dialog {
+  width: 100%;
+  height: 80%;
 }
 
+.modal-header {
+  background: #0d6efd;
+  color: white;
+}
+
+/* ================= ANIMATIONS ================= */
+.blink {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.flip-card-inner {
+  animation: flip 10s infinite;
+}
+
+@keyframes flip {
+  0% { transform: rotateY(0deg); }
+  50% { transform: rotateY(180deg); }
+  100% { transform: rotateY(360deg); }
+}
+
+/* ================= FOOTER ================= */
 footer {
-  position:fixed;
-  bottom:0;
-  width:100%;
-  background:#fff;
-  border-top:1px solid #ddd;
-  text-align:center;
-  font-size:24px;
-  padding:10px;
+  font-family: Akshar, sans-serif;
+  font-size: 30px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  background: #fff;
+  height: 80px;
+  border-top: 1px solid #0000ff1c;
+  padding: 10px;
+  z-index: 9;
 }
 
+@media (min-width: 1024px) {
+  footer {
+    z-index: 999;
+  }
+}
 </style>
 </head>
 
 <body>
 
-<form id="form1">
+<form id="form1" style="padding: 10px 0 100px; background:white">
 
-<div class="text-center mt-3">
-<h2>सांगली जिल्हा परिषद सार्वजनिक निवडणूक २०२६</h2>
-<h1>डमी मतदान यंत्र</h1>
+<!-- HEADER -->
+<div style="text-align:center; font-family:Akshar; font-size:4vw; margin-top:10px;">
+  <h2>सांगली जिल्हा परिषद सार्वजनिक निवडणूक २०२६</h2>
+  <h1>डमी मतदान यंत्र</h1>
 </div>
 
-<div class="buttonIntro w-75 text-center">
-डेमो मतदानासाठी धनुष्यबाण निशाणी समोरील निळे बटण दाबावे
+<!-- INTRO BUTTON -->
+<div style="width:100%;">
+  <div class="buttonIntro" style="width:80%; margin:auto; font-size:3vw;">
+    डेमो मतदानासाठी धनुष्यबाण निशाणी समोरील निळे बटण दाबावे
+  </div>
 </div>
 
-<div class="text-center fs-3 mt-3">
-मतदानाच्या दिवशी सुद्धा  
-<strong>धनुष्यबाण</strong> चिन्हासमोरील बटन दाबून  
-<strong>विद्या सचिन मोटे</strong> यांना विजयी करा!
+<!-- MAIN TEXT -->
+<div style="text-align:center; font-family:Akshar; font-size:40px; margin-top:20px;">
+  मतदानाच्या दिवशी सुद्धा  
+  "<strong>धनुष्यबाण</strong>"  
+  या चिन्हासमोरील बटन दाबून  
+  "<strong>विद्या सचिन मोटे</strong>"  
+  यांना प्रचंड मतांनी विजयी करा!
 </div>
 
-<center class="mt-2">
-<img class="wimage" src="https://drive.google.com/thumbnail?id=1D2gYdluEPSJojtxfDOFIs1_w0OLSkVeY&sz=w1000">
-</center>
-
-<div class="bg-warning text-center fs-3 p-3 mt-3">
-<strong>धनुष्यबाण</strong> चिन्हासमोरील बटन दाबा  
-<br> मतदान दिनांक: **५ फेब्रुवारी २०२६**
-</div>
-
-<table class="mt-3">
-
+<!-- TABLE -->
+<table style="margin:auto; width:98%; text-align:center; font-size:4vw; border-collapse:collapse;">
+<thead>
 <tr>
-<td>अ.क्र</td>
-<td colspan="2">उमेदवार</td>
-<td>चिन्ह</td>
-<td>बटन</td>
+  <td>अ.क्र</td>
+  <td colspan="2">उमेदवाराचे नाव</td>
+  <td>चिन्ह</td>
+  <td style="background:antiquewhite;">बटन</td>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+  <td>१.</td>
+  <td colspan="2"></td>
+  <td></td>
+  <td style="background:antiquewhite;">
+    <div style="display:flex; align-items:center;">
+      <img id="errorimage1" src="https://drive.google.com/thumbnail?id=1xrvrDmR0JHtOc2UtY_M98CTvLuusOF0g" style="width:6vw;">
+      <div id="errorbtn1" class="errorbtn buttonCorrect" style="width:100%;"></div>
+    </div>
+  </td>
 </tr>
 
 <tr>
-<td>१</td>
-<td colspan="2"></td>
-<td></td>
-<td><div id="errorbtn1" class="button"></div></td>
+  <td>२.</td>
+  <td colspan="2">विद्या सचिन मोटे</td>
+  <td style="background:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRy17FyNXS6dujX4Iz-3oP261pBbRCj2GxyLw&s') center/cover;"></td>
+  <td style="background:antiquewhite;">
+    <div style="display:flex; align-items:center;">
+      <img id="errorimage2" src="https://drive.google.com/thumbnail?id=1xrvrDmR0JHtOc2UtY_M98CTvLuusOF0g" style="width:6vw;">
+      <div id="errorbtn2" class="errorbtn button">बटण दाबा</div>
+    </div>
+  </td>
 </tr>
 
-<tr>
-<td>२</td>
-<td colspan="2"><strong>विद्या सचिन मोटे</strong></td>
-<td style="background:url('https://artworkbird.co.in/wp-content/uploads/2024/11/Shiv-Sena-Logo-1.png') center/cover"></td>
-<td><div id="errorbtn2" class="button">बटण दाबा</div></td>
-</tr>
-
-<tr><td>३</td><td colspan="2"></td><td></td><td><div class="button"></div></td></tr>
-<tr><td>४</td><td colspan="2"></td><td></td><td><div class="button"></div></td></tr>
-<tr><td>५</td><td colspan="2"></td><td></td><td><div class="button"></div></td></tr>
-<tr><td>६</td><td colspan="2"></td><td></td><td><div class="button"></div></td></tr>
-
+</tbody>
 </table>
 
 </form>
 
+<!-- FOOTER -->
 <footer>
-Crafted by <a href="tel:+918390347021">+91 8390347021</a> Ashok Karande
+  Crafted by <a href="tel:+919404750243">+91 8390347021</a> Ashok Karande
 </footer>
 
+<!-- JS -->
 <script>
+$(document).ready(function () {
 
-$(document).ready(function(){
+  const intro = new Audio('inc/demo_prabhakargharge.mp3');
+  const error = new Audio('inc/error.mp3');
+  const correct = new Audio('inc/correct_new.mp3');
+  const last = new Audio('inc/last_prabhakargharge.mp3');
 
-let intro = new Audio('inc/demo_prabhakargharge.mp3');
-let error = new Audio('inc/error.mp3');
-let correct = new Audio('inc/correct_new.mp3');
-let last = new Audio('inc/last_prabhakargharge.mp3');
+  $(".buttonIntro").on("click", function () {
+    intro.play();
+  });
 
-$(".buttonIntro").click(() => intro.play());
+  $(".button").on("click", function () {
+    error.play();
+  });
 
-$(".button").click(() => error.play());
+  $(".buttonCorrect").on("click", function () {
+    correct.play();
+    setTimeout(() => last.play(), 1000);
+    setTimeout(() => $('#myModal1').modal('show'), 1000);
+  });
 
-$("#errorbtn2").click(() => {
-  correct.play();
-  setTimeout(() => last.play(), 1000);
-  setTimeout(() => $('#myModal1').modal('show'), 1200);
+  $(document).on('click', '.errorbtn', function () {
+    const id = $(this).attr('id').replace('errorbtn', '');
+    const img = $("#errorimage" + id);
+
+    img.attr("src", "https://drive.google.com/thumbnail?id=1A18WcwmNX69Tyuv__-i8HCw5iQrN2kiJ");
+
+    setTimeout(() => {
+      img.attr("src", "https://drive.google.com/thumbnail?id=1xrvrDmR0JHtOc2UtY_M98CTvLuusOF0g");
+    }, 2000);
+  });
+
 });
-
-});
-
 </script>
 
 </body>
