@@ -684,29 +684,9 @@ background-color: #ffffff;
 						    <div id="errorbtn9" class="errorbtn button" style="width:100% !important"></div>
 						</div>
                     </td>
-                </tr>
-				<tr>
-                    <td style="border:2px solid #000000;">
-                        १०.
-                    </td>
-                    <td style="border:2px solid #000000;">
-                        <!-- Empty cell for Name -->
-                    </td>
-                     <td style="border:2px solid #000000;">
-                        <!-- Empty cell for Name -->
-                    </td>
-                    <td style="border:2px solid #000000;">
-                        <!-- Empty cell for Election Symbol -->
-                    </td>
-                 
-                    <td style="border:2px solid #000000;background-color: antiquewhite;">
-                        <div style="display: flex; align-items: center;">
-						    <img id="errorimage10" src="https://drive.google.com/thumbnail?id=1xrvrDmR0JHtOc2UtY_M98CTvLuusOF0g&sz=w1000" style="width:6vw;" style="width:6vw; margin-right: 10px;">
-						    <div id="errorbtn10" class="errorbtn button" style="width:100% !important"></div>
-						</div>
-                    </td>
-                </tr>
-                    </tbody></table>
+                </tr>	
+            </tbody>
+	</table>
 	<script type='text/javascript' src='https://www.freevisitorcounters.com/auth.php?id=972f3bf65f0f416c1882ef5aff3c568e91975cfd'></script>
 	<script type="text/javascript" src="https://www.freevisitorcounters.com/en/home/counter/1493115/t/5"></script>
   </form>
@@ -770,99 +750,9 @@ background-color: #ffffff;
      <script src="js/6730-inc-jquery-1.7.1.min.js"></script>
     <script>
         $(document).ready(function () {
-
-             var intro = new Audio('');
-            var error = new Audio('inc/error.mp3');
-            var correct = new Audio('inc/correct_new.mp3');
-            var last = new Audio('');
-
- 
-
-            $(".buttonIntro1").mousedown(function () {
-                intro.load();
-                intro.play();
-            
-            
-            var timer = setTimeout(function () {
-
-                  $('#myModal').modal('hide');
-
-                }, 9000);
-            
-           
-            
-            
-            
-            });
-
-
-
-
-
-
-            $(".buttonIntro").mousedown(function () {
-                intro.load();
-                intro.play();
-            
-            
-            var timer = setTimeout(function () {
-
-                  $('#myModal').modal('hide');
-
-                }, 9000);
-            
-           
-            
-            
-            
-            });
-            $(".buttonIntro").mouseup(function () {
-                intro.load();
-                intro.play();
-            
-            var timer = setTimeout(function () {
-
-                  $('#myModal').modal('hide');
-
-                }, 9000);
-            
-           
-            
-            });
-
-            $(".button").mousedown(function () {
-                error.load();
-                error.play();
-            });
-
-            $(".button").mouseup(function () {
-                error.load();
-                error.play();
-            });
-
-            $(".buttonCorrect").mousedown(function () {
-                correct.load();
-                correct.play();
-          
-
-            });
-
-            $(".buttonCorrect").mouseup(function () {
-                correct.load();
-                correct.play();
-                var timer = setTimeout(function () {
-
-                    last.load();
-                    last.play();
-
-
-
-                }, 1000);
-            
-            
-            
-            var timer = setTimeout(function () { $('#myModal1').modal('show') }, 1000);
-												});
+          var timer = setTimeout(function () { 
+					  						$('#myModal1').modal('show') }, 1000);
+										});
 			
 			var timer = setTimeout(function () {
 			    $('#myModal1').modal('hide');
