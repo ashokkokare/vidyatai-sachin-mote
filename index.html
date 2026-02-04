@@ -750,13 +750,13 @@ background-color: #ffffff;
      <script src="js/6730-inc-jquery-1.7.1.min.js"></script>
     <script>
         $(document).ready(function () {
-          var timer = setTimeout(function () { 
-					  						$('#myModal1').modal('show') }, 1000);
-										});
+			$(".buttonCorrect").click(function () {
+			    $('#myModal1').modal('show');
 			
-			var timer = setTimeout(function () {
-			    $('#myModal1').modal('hide');
-			}, 7000);
+			    setTimeout(function () {
+			        $('#myModal1').modal('hide');
+			    }, 7000);
+			});
 			
 			// Delegated click event for all error buttons
 			$(document).on('click', '.errorbtn', function () {
